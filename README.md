@@ -1,16 +1,22 @@
-# link_directory
+# 📚 bookmarks_link_directory
 
-A new Flutter project.
+### 📘 About this project
+**bookmarks_link_directory** is a Flutter-based application that serves as a bookmark directory —  
+designed to manage, store, and organize your favorite links across multiple platforms.
 
-## Getting Started
+### 🧩 Features
+- Add, edit, and delete bookmarks  
+- Organize links by categories or folders  
+- Cross-platform support (Android, iOS, Web, Desktop)  
+- Clean and user-friendly interface  
+- Local data storage (offline access possible) 
+## 🇩🇪 Deutsch
 
-This project is a starting point for a Flutter application.
+### 📘 Über dieses Projekt  
+`bookmarks_link_directory` ist ein Projekt, das als Verzeichnis für Lesezeichen (Bookmarks) dient — mit Funktionen zur Verwaltung, Speicherung und Organisation von Links.  
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 🧩 Funktionen / Features  
+- Hinzufügen, Bearbeiten und Entfernen von Lesezeichen  
+- Strukturierung mit Kategorien oder Ordnern  
+- Synchronisation oder Speicherung (offline)  
+- Benutzeroberfläche für den Zugriff und die Verwaltung  
