@@ -24,16 +24,6 @@ designed to manage, store, and organize your favorite links across multiple plat
 
 ---
 
-### 📱 Screenshots
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/8e0be878-578e-424f-8d8f-77a67d84e99d" width="250" />
-  <img src="https://github.com/user-attachments/assets/b02982b5-6325-4f9a-8125-57b562b5727e" width="250" />
-  <img src="https://github.com/user-attachments/assets/0eddc0ed-c4d2-442e-8abf-467f4dd76b03" width="250" />
-</p>
-
----
-
 ### 🛠️ Tech Stack
 This project is built with **Flutter** and includes configurations for multiple platforms:
 - **Android**
@@ -49,7 +39,18 @@ This project is built with **Flutter** and includes configurations for multiple 
 
 ---
 
+### 📱 Screenshots
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8e0be878-578e-424f-8d8f-77a67d84e99d" width="250" />
+  <img src="https://github.com/user-attachments/assets/b02982b5-6325-4f9a-8125-57b562b5727e" width="250" />
+  <img src="https://github.com/user-attachments/assets/0eddc0ed-c4d2-442e-8abf-467f4dd76b03" width="250" />
+</p>
+
+---
+
 ### 🚀 Installation & Usage
 1. Clone the repository:
    ```bash
    git clone https://github.com/EavenCS/bookmarks_link_directory.git
+
