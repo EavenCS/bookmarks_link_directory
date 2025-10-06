@@ -4,6 +4,7 @@ import 'package:link_directory/boxes.dart';
 import 'package:link_directory/model/bookmark.dart';
 import 'package:link_directory/pages/add_link.dart';
 import 'package:link_directory/pages/settings.dart';
+import 'package:flutter/services.dart';
 
 class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
@@ -85,16 +86,13 @@ class _MyWidgetState extends State<MyWidget> {
                   );
                 }
 
-                // 🔽 Hier mit Dismissible (Swipe-to-Delete)
                 return ListView.builder(
                   itemCount: bookmarks.length,
                   itemBuilder: (context, index) {
                     final bookmark = bookmarks[index];
 
                     return Dismissible(
-                      key: Key(
-                        bookmark.key.toString(),
-                      ), // eindeutiger Key wichtig
+                      key: Key(bookmark.key.toString()),
                       direction: DismissDirection.endToStart,
                       background: Container(
                         color: Colors.red,
@@ -123,10 +121,23 @@ class _MyWidgetState extends State<MyWidget> {
                           onPressed: () {
                             setState(() {
                               bookmark.isFavorite = !bookmark.isFavorite;
-                              bookmark.save(); // 🔑 Änderung speichern
+                              bookmark.save();
                             });
                           },
                         ),
+                        onTap: () async {
+                          await Clipboard.setData(
+                            ClipboardData(text: bookmark.link),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "🔗 Link kopiert: ${bookmark.link}",
+                              ),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        },
                       ),
                     );
                   },
