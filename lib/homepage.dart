@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          // 🔹 Filter (bleibt schwarz, auch bei Favoritenfilter)
+          // 🔹 Filter (bleibt schwarz)
           IconButton(
             icon: Icon(
               Icons.filter_list,
@@ -68,14 +68,12 @@ class _HomePageState extends State<HomePage> {
           final allCategories =
               bookmarks.expand((b) => b.tags).toSet().toList();
 
-          final filtered =
-              bookmarks.where((b) {
-                final matchesCategory =
-                    selectedCategory == null ||
-                    b.tags.contains(selectedCategory);
-                final matchesFav = !showFavoritesOnly || b.isFavorite;
-                return matchesCategory && matchesFav;
-              }).toList();
+          final filtered = bookmarks.where((b) {
+            final matchesCategory =
+                selectedCategory == null || b.tags.contains(selectedCategory);
+            final matchesFav = !showFavoritesOnly || b.isFavorite;
+            return matchesCategory && matchesFav;
+          }).toList();
 
           if (filtered.isEmpty) {
             return const Center(
@@ -92,13 +90,12 @@ class _HomePageState extends State<HomePage> {
 
           return ListView.separated(
             itemCount: filtered.length,
-            separatorBuilder:
-                (context, index) => const Divider(
-                  height: 1,
-                  color: Color(0xFFE5E5E5),
-                  indent: 16,
-                  endIndent: 16,
-                ),
+            separatorBuilder: (context, index) => const Divider(
+              height: 1,
+              color: Color(0xFFE5E5E5),
+              indent: 16,
+              endIndent: 16,
+            ),
             itemBuilder: (context, index) {
               final b = filtered[index];
 
@@ -201,6 +198,17 @@ class _HomePageState extends State<HomePage> {
                       });
                     },
                   ),
+
+                  // 👇 Tap-to-Copy Feature (aus deiner alten Version übernommen)
+                  onTap: () async {
+                    await Clipboard.setData(ClipboardData(text: b.link));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("🔗 Link kopiert: ${b.link}"),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                  },
                 ),
               );
             },
@@ -239,123 +247,117 @@ class _HomePageState extends State<HomePage> {
       builder: (_) {
         return Padding(
           padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Filteroptionen",
-                  style: TextStyle(
-                    fontFamily: "SpaceGrotesk",
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                // ✅ Lokaler State für flüssige Animation
-                StatefulBuilder(
-                  builder: (context, setInnerState) {
-                    return SwitchListTile(
-                      title: const Text(
-                        "Nur Favoriten anzeigen",
-                        style: TextStyle(fontFamily: "SpaceGrotesk"),
-                      ),
-                      value: showFavoritesOnly,
-                      onChanged: (val) {
-                        setInnerState(() => showFavoritesOnly = val);
-                        setState(() => showFavoritesOnly = val);
-                      },
-                    );
-                  },
-                ),
-                const Divider(),
-
-                const Text(
-                  "Kategorie auswählen:",
-                  style: TextStyle(
-                    fontFamily: "SpaceGrotesk",
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 10),
-
-                DropdownButtonFormField<String>(
-                  value: selectedCategory,
-                  hint: const Text(
-                    "Alle",
-                    style: TextStyle(fontFamily: "SpaceGrotesk"),
-                  ),
-                  items: [
-                    const DropdownMenuItem(
-                      value: null,
-                      child: Text(
-                        "Alle",
-                        style: TextStyle(fontFamily: "SpaceGrotesk"),
-                      ),
-                    ),
-                    ...allCategories.map(
-                      (c) => DropdownMenuItem(
-                        value: c,
-                        child: Text(
-                          c,
-                          style: const TextStyle(fontFamily: "SpaceGrotesk"),
-                        ),
-                      ),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() => selectedCategory = value);
-                  },
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+          child: StatefulBuilder(
+            builder: (context, setInnerState) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Filteroptionen",
+                    style: TextStyle(
+                      fontFamily: "SpaceGrotesk",
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
+                  const SizedBox(height: 20),
 
-                const SizedBox(height: 25),
-
-                Center(
-                  child: ElevatedButton.icon(
-                    icon: const Icon(Icons.clear),
-                    label: const Text(
-                      "Filter zurücksetzen",
+                  SwitchListTile(
+                    title: const Text(
+                      "Nur Favoriten anzeigen",
                       style: TextStyle(fontFamily: "SpaceGrotesk"),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 12,
+                    value: showFavoritesOnly,
+                    onChanged: (val) {
+                      setInnerState(() => showFavoritesOnly = val);
+                      setState(() => showFavoritesOnly = val);
+                    },
+                  ),
+
+                  const Divider(),
+                  const Text(
+                    "Kategorie auswählen:",
+                    style: TextStyle(
+                      fontFamily: "SpaceGrotesk",
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+
+                  DropdownButtonFormField<String>(
+                    value: selectedCategory,
+                    hint: const Text(
+                      "Alle",
+                      style: TextStyle(fontFamily: "SpaceGrotesk"),
+                    ),
+                    items: [
+                      const DropdownMenuItem(
+                        value: null,
+                        child: Text("Alle",
+                            style: TextStyle(fontFamily: "SpaceGrotesk")),
                       ),
-                      shape: RoundedRectangleBorder(
+                      ...allCategories.map(
+                        (c) => DropdownMenuItem(
+                          value: c,
+                          child: Text(c,
+                              style:
+                                  const TextStyle(fontFamily: "SpaceGrotesk")),
+                        ),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() => selectedCategory = value);
+                    },
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        selectedCategory = null;
-                        showFavoritesOnly = false;
-                      });
-                      Navigator.pop(context);
-                    },
                   ),
-                ),
-              ],
-            ),
+                  const SizedBox(height: 25),
+
+                  Center(
+                    child: ElevatedButton.icon(
+                      icon: const Icon(Icons.clear),
+                      label: const Text(
+                        "Filter zurücksetzen",
+                        style: TextStyle(fontFamily: "SpaceGrotesk"),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 12,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          selectedCategory = null;
+                          showFavoritesOnly = false;
+                        });
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         );
       },
     );
   }
 
-  // 🔹 Bearbeiten-Dialog mit modernem Kategorie-Selector
+  // 🔹 Bearbeiten + Kategorie-Auswahl + Löschen bleiben unverändert
   void _editBookmark(Bookmark b) {
     final titleController = TextEditingController(text: b.title);
     final linkController = TextEditingController(text: b.link);
@@ -366,97 +368,91 @@ class _HomePageState extends State<HomePage> {
 
     showDialog(
       context: context,
-      builder:
-          (_) => AlertDialog(
-            title: const Text(
-              "Bookmark bearbeiten",
-              style: TextStyle(
-                fontFamily: "SpaceGrotesk",
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: titleController,
-                  decoration: const InputDecoration(
-                    labelText: "Titel",
-                    labelStyle: TextStyle(fontFamily: "SpaceGrotesk"),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: linkController,
-                  decoration: const InputDecoration(
-                    labelText: "Link",
-                    labelStyle: TextStyle(fontFamily: "SpaceGrotesk"),
-                  ),
-                ),
-                const SizedBox(height: 10),
-
-                // 🔹 Kategorie-Button im TextField-Stil
-                GestureDetector(
-                  onTap: () {
-                    FocusScope.of(context).unfocus();
-                    _showCategorySelector(
-                      context,
-                      allCategories,
-                      selectedCategory,
-                      (val) => selectedCategory = val,
-                    );
-                  },
-                  child: AbsorbPointer(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: "Kategorie",
-                        labelStyle: const TextStyle(fontFamily: "SpaceGrotesk"),
-                        suffixIcon: const Icon(Icons.arrow_drop_down),
-                        border: const OutlineInputBorder(),
-                        hintText: selectedCategory ?? "Keine",
-                      ),
-                      controller: TextEditingController(
-                        text: selectedCategory ?? "",
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  "Abbrechen",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    b.title = titleController.text.trim();
-                    b.link = linkController.text.trim();
-                    b.tags =
-                        selectedCategory != null ? [selectedCategory!] : [];
-                    b.save();
-                  });
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                ),
-                child: const Text(
-                  "Speichern",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
-                ),
-              ),
-            ],
+      builder: (_) => AlertDialog(
+        title: const Text(
+          "Bookmark bearbeiten",
+          style: TextStyle(
+            fontFamily: "SpaceGrotesk",
+            fontWeight: FontWeight.bold,
           ),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
+                labelText: "Titel",
+                labelStyle: TextStyle(fontFamily: "SpaceGrotesk"),
+              ),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              controller: linkController,
+              decoration: const InputDecoration(
+                labelText: "Link",
+                labelStyle: TextStyle(fontFamily: "SpaceGrotesk"),
+              ),
+            ),
+            const SizedBox(height: 10),
+
+            // Kategorie im TextField-Stil
+            GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+                _showCategorySelector(
+                  context,
+                  allCategories,
+                  selectedCategory,
+                  (val) => selectedCategory = val,
+                );
+              },
+              child: AbsorbPointer(
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: "Kategorie",
+                    labelStyle:
+                        const TextStyle(fontFamily: "SpaceGrotesk"),
+                    suffixIcon: const Icon(Icons.arrow_drop_down),
+                    border: const OutlineInputBorder(),
+                    hintText: selectedCategory ?? "Keine",
+                  ),
+                  controller: TextEditingController(
+                    text: selectedCategory ?? "",
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Abbrechen",
+                style: TextStyle(fontFamily: "SpaceGrotesk")),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                b.title = titleController.text.trim();
+                b.link = linkController.text.trim();
+                b.tags = selectedCategory != null ? [selectedCategory!] : [];
+                b.save();
+              });
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text("Speichern",
+                style: TextStyle(fontFamily: "SpaceGrotesk")),
+          ),
+        ],
+      ),
     );
   }
 
-  // 🔹 Kategorieauswahl im BottomSheet
   void _showCategorySelector(
     BuildContext context,
     List<String> allCategories,
@@ -487,10 +483,8 @@ class _HomePageState extends State<HomePage> {
               ),
               const Divider(height: 1),
               ListTile(
-                title: const Text(
-                  "Keine",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
-                ),
+                title: const Text("Keine",
+                    style: TextStyle(fontFamily: "SpaceGrotesk")),
                 onTap: () {
                   onSelect(null);
                   Navigator.pop(context);
@@ -501,12 +495,12 @@ class _HomePageState extends State<HomePage> {
                 (c) => ListTile(
                   title: Text(
                     c,
-                    style: const TextStyle(fontFamily: "SpaceGrotesk"),
+                    style:
+                        const TextStyle(fontFamily: "SpaceGrotesk"),
                   ),
-                  trailing:
-                      c == selectedCategory
-                          ? const Icon(Icons.check, color: Colors.black)
-                          : null,
+                  trailing: c == selectedCategory
+                      ? const Icon(Icons.check, color: Colors.black)
+                      : null,
                   onTap: () {
                     onSelect(c);
                     Navigator.pop(context);
@@ -521,45 +515,39 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // 🔹 Löschen mit Bestätigung
   void _confirmDelete(Bookmark b) {
     showDialog(
       context: context,
-      builder:
-          (_) => AlertDialog(
-            title: const Text(
-              "Bookmark löschen?",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
-            ),
-            content: Text(
-              "'${b.title}' wird dauerhaft gelöscht.",
-              style: const TextStyle(fontFamily: "SpaceGrotesk"),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  "Abbrechen",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  HapticFeedback.heavyImpact();
-                  setState(() => b.delete());
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
-                  foregroundColor: Colors.white,
-                ),
-                child: const Text(
-                  "Löschen",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
-                ),
-              ),
-            ],
+      builder: (_) => AlertDialog(
+        title: const Text(
+          "Bookmark löschen?",
+          style: TextStyle(fontFamily: "SpaceGrotesk"),
+        ),
+        content: Text(
+          "'${b.title}' wird dauerhaft gelöscht.",
+          style: const TextStyle(fontFamily: "SpaceGrotesk"),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Abbrechen",
+                style: TextStyle(fontFamily: "SpaceGrotesk")),
           ),
+          ElevatedButton(
+            onPressed: () {
+              HapticFeedback.heavyImpact();
+              setState(() => b.delete());
+              Navigator.pop(context);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.redAccent,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text("Löschen",
+                style: TextStyle(fontFamily: "SpaceGrotesk")),
+          ),
+        ],
+      ),
     );
   }
 }
