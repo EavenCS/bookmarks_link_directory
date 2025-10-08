@@ -2,16 +2,24 @@ import 'package:hive/hive.dart';
 
 part 'bookmark.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class Bookmark extends HiveObject {
   @HiveField(0)
-  final String title;
+  String title;
 
   @HiveField(1)
-  final String link;
+  String link;
 
   @HiveField(2)
   bool isFavorite;
 
-  Bookmark({required this.title, required this.link, this.isFavorite = false});
+  @HiveField(3)
+  List<String> tags;
+
+  Bookmark({
+    required this.title,
+    required this.link,
+    this.isFavorite = false,
+    List<String>? tags,
+  }) : tags = tags ?? [];
 }
