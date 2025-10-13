@@ -37,9 +37,9 @@ class _HomePageState extends State<HomePage> {
         actions: [
           // 🔹 Filter (bleibt schwarz)
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.filter_list,
-              color: selectedCategory != null ? Colors.amber : Colors.black,
+              color: Colors.black,
             ),
             tooltip: "Filtern",
             onPressed: () => _showFilterOptions(context),

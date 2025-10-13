@@ -8,7 +8,7 @@ part of 'bookmark.dart';
 
 class BookmarkAdapter extends TypeAdapter<Bookmark> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
   Bookmark read(BinaryReader reader) {
@@ -20,7 +20,7 @@ class BookmarkAdapter extends TypeAdapter<Bookmark> {
       title: fields[0] as String,
       link: fields[1] as String,
       isFavorite: fields[2] as bool,
-      tags: (fields[3] as List?)?.cast<String>(),
+      tags: fields[3] != null ? (fields[3] as List).cast<String>() : [],
     );
   }
 
