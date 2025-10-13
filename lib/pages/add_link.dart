@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:link_directory/model/bookmark.dart';
 import 'package:link_directory/boxes.dart';
+import 'package:link_directory/widgets/appbar.dart';
 
 class AddLink extends StatefulWidget {
   const AddLink({super.key});
@@ -72,17 +73,8 @@ class _AddLinkState extends State<AddLink> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          "Neues Bookmark",
-          style: TextStyle(
-            fontFamily: "SpaceGrotesk",
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        elevation: 0,
-        foregroundColor: Colors.black87,
-        backgroundColor: Colors.white,
+      appBar: const CustomAppBar(
+        title: "Neues Bookmark",
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

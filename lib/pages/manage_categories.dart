@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:link_directory/boxes.dart';
 import 'package:link_directory/model/bookmark.dart';
+import 'package:link_directory/widgets/appbar.dart';
 
 class ManageCategoriesPage extends StatefulWidget {
   const ManageCategoriesPage({super.key});
@@ -118,11 +119,8 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Kategorien verwalten",
-          style: TextStyle(fontFamily: "SpaceGrotesk"),
-        ),
+      appBar: const CustomAppBar(
+        title: "Kategorien verwalten",
       ),
       body: ListView.builder(
         itemCount: categories.length,

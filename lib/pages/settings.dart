@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:link_directory/pages/about_dev.dart';
-import 'package:link_directory/pages/manage_categories.dart'; // 👈 zum Kategorien verwalten
+import 'package:link_directory/pages/manage_categories.dart';
+import 'package:link_directory/widgets/appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
@@ -14,17 +15,8 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Einstellungen",
-          style: TextStyle(
-            fontFamily: "SpaceGrotesk",
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
-        elevation: 1,
+      appBar: const CustomAppBar(
+        title: "Einstellungen",
       ),
       backgroundColor: Colors.white,
       body: ListView(

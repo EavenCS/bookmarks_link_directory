@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:link_directory/widgets/appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutDevPage extends StatelessWidget {
@@ -14,17 +15,9 @@ class AboutDevPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Über den Entwickler",
-          style: TextStyle(
-            fontFamily: "SpaceGrotesk",
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      backgroundColor: Colors.white,
+      appBar: const CustomAppBar(title: "Über den Entwickler"),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
