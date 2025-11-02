@@ -94,6 +94,42 @@ class _SettingsState extends State<Settings> {
           ]),
           cardWidget([
             const Text(
+              "Support",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: "SpaceGrotesk",
+              ),
+            ),
+            Divider(color: Colors.grey[400]),
+
+            const SizedBox(height: 12),
+            const Text(
+              "Wenn du Fragen oder Probleme hast, kontaktiere uns gern per E-Mail.",
+              style: const TextStyle(
+                fontFamily: "SpaceGrotesk",
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            ElevatedButton.icon(
+              onPressed: _sendSupportEmail,
+              icon: const Icon(Icons.mail_outline),
+              label: const Text(
+                "Support kontaktieren",
+                style: const TextStyle(
+                  fontFamily: "SpaceGrotesk",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+              ),
+            ),
+          ]),
+          cardWidget([
+            const Text(
               "Über die App",
               style: const TextStyle(
                 fontSize: 18,
@@ -129,42 +165,6 @@ class _SettingsState extends State<Settings> {
               icon: const Icon(Icons.person),
               label: const Text(
                 "Über den Entwickler",
-                style: const TextStyle(
-                  fontFamily: "SpaceGrotesk",
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-              ),
-            ),
-          ]),
-          cardWidget([
-            const Text(
-              "Support",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                fontFamily: "SpaceGrotesk",
-              ),
-            ),
-            Divider(color: Colors.grey[400]),
-
-            const SizedBox(height: 12),
-            const Text(
-              "Wenn du Fragen oder Probleme hast, kontaktiere uns gern per E-Mail.",
-              style: const TextStyle(
-                fontFamily: "SpaceGrotesk",
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton.icon(
-              onPressed: _sendSupportEmail,
-              icon: const Icon(Icons.mail_outline),
-              label: const Text(
-                "Support kontaktieren",
                 style: const TextStyle(
                   fontFamily: "SpaceGrotesk",
                   fontWeight: FontWeight.bold,
