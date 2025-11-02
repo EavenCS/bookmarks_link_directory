@@ -89,26 +89,6 @@ class _HomePageState extends State<HomePage> {
 
               return Slidable(
                 key: ValueKey(b.key),
-
-                startActionPane: ActionPane(
-                  motion: const BehindMotion(),
-                  extentRatio: 0.22,
-                  children: [
-                    SlidableAction(
-                      onPressed: (context) {
-                        HapticFeedback.mediumImpact();
-                        setState(() {
-                          b.isFavorite = !b.isFavorite;
-                          b.save();
-                        });
-                      },
-                      backgroundColor: Colors.amber.withOpacity(0.1),
-                      foregroundColor: Colors.amber.shade800,
-                      icon: b.isFavorite ? Icons.star_border : Icons.star,
-                    ),
-                  ],
-                ),
-
                 endActionPane: ActionPane(
                   motion: const BehindMotion(),
                   extentRatio: 0.4,

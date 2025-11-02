@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:link_directory/pages/about_dev.dart';
-import 'package:link_directory/pages/manage_categories.dart';
-import 'package:link_directory/widgets/appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Settings extends StatefulWidget {
@@ -15,114 +13,86 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: "Einstellungen",
+      appBar: AppBar(
+        title: const Text(
+          "Einstellungen",
+          style: TextStyle(
+            fontFamily: "SpaceGrotesk",
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        foregroundColor: Colors.black87,
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       backgroundColor: Colors.white,
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16),
         children: [
-          // 🔹 Kategorien-Verwaltung
-          cardWidget([
-            const Text(
-              "Kategorien",
-              style: TextStyle(
-                fontFamily: "SpaceGrotesk",
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Divider(color: Colors.grey[400]),
-            const SizedBox(height: 8),
-            const Text(
-              "Bearbeite oder lösche bestehende Kategorien.",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => const ManageCategoriesPage(),
-                  ),
-                );
-              },
-              icon: const Icon(Icons.category),
-              label: const Text(
-                "Kategorien verwalten",
-                style: TextStyle(fontFamily: "SpaceGrotesk"),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-              ),
-            ),
-          ]),
-
-          // 🔹 Support
           cardWidget([
             const Text(
               "Support",
-              style: TextStyle(
-                fontFamily: "SpaceGrotesk",
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Divider(color: Colors.grey[400]),
-            const SizedBox(height: 8),
+
+            const SizedBox(height: 12),
             const Text(
-              "Wenn du Fragen oder Probleme hast, kontaktiere uns gerne per E-Mail.",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
+              "Wenn du Fragen oder Probleme hast, kontaktiere uns gern per E-Mail.",
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
               onPressed: _sendSupportEmail,
               icon: const Icon(Icons.mail_outline),
-              label: const Text(
-                "Support kontaktieren",
-                style: TextStyle(fontFamily: "SpaceGrotesk"),
-              ),
+              label: const Text("Support kontaktieren"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
               ),
             ),
           ]),
-
-          // 🔹 Über die App
           cardWidget([
             const Text(
               "Über die App",
-              style: TextStyle(
-                fontFamily: "SpaceGrotesk",
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Divider(color: Colors.grey[400]),
-            const SizedBox(height: 8),
-            const Text(
-              "Version: 1.0.0",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
-            ),
+            const SizedBox(height: 12),
+            const Text("Version: 1.0.0"),
             const SizedBox(height: 4),
+            const Text("Entwickelt von: Eaven-René Schmalz"),
+            const SizedBox(height: 8),
+
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const AboutDevPage()),
+                );
+              },
+              icon: const Icon(Icons.person),
+              label: const Text("Über den Entwickler"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+              ),
+            ),
+          ]),
+          cardWidget([
             const Text(
-              "Entwickelt von: Eaven-René Schmalz",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
+              "Support",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Divider(color: Colors.grey[400]),
+
+            const SizedBox(height: 12),
+            const Text(
+              "Wenn du Fragen oder Probleme hast, kontaktiere uns gern per E-Mail.",
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
-              onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => const AboutDevPage()));
-              },
-              icon: const Icon(Icons.person_outline),
-              label: const Text(
-                "Über den Entwickler",
-                style: TextStyle(fontFamily: "SpaceGrotesk"),
-              ),
+              onPressed: _sendSupportEmail,
+              icon: const Icon(Icons.mail_outline),
+              label: const Text("Support kontaktieren"),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
@@ -134,12 +104,11 @@ class _SettingsState extends State<Settings> {
     );
   }
 
-  // 🔸 Support-E-Mail senden
   void _sendSupportEmail() async {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
       path: 'schmalze6@gmail.com',
-      queryParameters: {'subject': 'Supportanfrage zur App'},
+      query: Uri.encodeFull('subject=Supportanfrage zur App'),
     );
 
     if (await canLaunchUrl(emailLaunchUri)) {
@@ -156,7 +125,7 @@ class _SettingsState extends State<Settings> {
   }
 }
 
-// 🔸 Wiederverwendbare Card-Funktion
+// Wiederverwendbare Card-Funktion
 Widget cardWidget(List<Widget> children) {
   return Card(
     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
