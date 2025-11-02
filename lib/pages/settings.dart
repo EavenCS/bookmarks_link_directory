@@ -31,20 +31,61 @@ class _SettingsState extends State<Settings> {
         children: [
           cardWidget([
             const Text(
-              "Support",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              "Buy me a Coffee",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: "SpaceGrotesk",
+              ),
             ),
             Divider(color: Colors.grey[400]),
 
             const SizedBox(height: 12),
             const Text(
-              "Wenn du Fragen oder Probleme hast, kontaktiere uns gern per E-Mail.",
+              "Hilft mir um Bookmarks länger zu betreiben",
+              style: const TextStyle(
+                fontFamily: "SpaceGrotesk",
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
               onPressed: _sendSupportEmail,
-              icon: const Icon(Icons.mail_outline),
-              label: const Text("Support kontaktieren"),
+              label: const Text(
+                "Espresso • 0,99 €",
+                style: const TextStyle(
+                  fontFamily: "SpaceGrotesk",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+              ),
+            ),
+            ElevatedButton.icon(
+              onPressed: _sendSupportEmail,
+              label: const Text(
+                "Latte • 2,99 €",
+                style: const TextStyle(
+                  fontFamily: "SpaceGrotesk",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+              ),
+            ),
+            ElevatedButton.icon(
+              onPressed: _sendSupportEmail,
+              label: const Text(
+                "Filter • 5,99 €",
+                style: const TextStyle(
+                  fontFamily: "SpaceGrotesk",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
@@ -54,13 +95,29 @@ class _SettingsState extends State<Settings> {
           cardWidget([
             const Text(
               "Über die App",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: "SpaceGrotesk",
+              ),
             ),
             Divider(color: Colors.grey[400]),
             const SizedBox(height: 12),
-            const Text("Version: 1.0.0"),
+            const Text(
+              "Version: 1.0.0",
+              style: const TextStyle(
+                fontFamily: "SpaceGrotesk",
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 4),
-            const Text("Entwickelt von: Eaven-René Schmalz"),
+            const Text(
+              "Entwickelt von: Eaven-René Schmalz",
+              style: const TextStyle(
+                fontFamily: "SpaceGrotesk",
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const SizedBox(height: 8),
 
             ElevatedButton.icon(
@@ -70,7 +127,13 @@ class _SettingsState extends State<Settings> {
                 );
               },
               icon: const Icon(Icons.person),
-              label: const Text("Über den Entwickler"),
+              label: const Text(
+                "Über den Entwickler",
+                style: const TextStyle(
+                  fontFamily: "SpaceGrotesk",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
@@ -80,19 +143,33 @@ class _SettingsState extends State<Settings> {
           cardWidget([
             const Text(
               "Support",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                fontFamily: "SpaceGrotesk",
+              ),
             ),
             Divider(color: Colors.grey[400]),
 
             const SizedBox(height: 12),
             const Text(
               "Wenn du Fragen oder Probleme hast, kontaktiere uns gern per E-Mail.",
+              style: const TextStyle(
+                fontFamily: "SpaceGrotesk",
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
               onPressed: _sendSupportEmail,
               icon: const Icon(Icons.mail_outline),
-              label: const Text("Support kontaktieren"),
+              label: const Text(
+                "Support kontaktieren",
+                style: const TextStyle(
+                  fontFamily: "SpaceGrotesk",
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
