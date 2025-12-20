@@ -119,6 +119,7 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: const CustomAppBar(
         title: "Kategorien verwalten",
       ),

@@ -531,7 +531,10 @@ class _HomePageState extends State<HomePage> {
               ElevatedButton(
                 onPressed: () {
                   HapticFeedback.heavyImpact();
-                  setState(() => b.delete());
+
+                  final box = Boxes.getBookmarksBox();
+                  box.delete(b.key); // <- wichtig
+
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(

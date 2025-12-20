@@ -15,14 +15,12 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: "Einstellungen",
-      ),
+      appBar: const CustomAppBar(title: "Einstellungen"),
       backgroundColor: Colors.white,
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16),
         children: [
-          // 🔹 Kategorien-Verwaltung
+          // 🔹 Kategorienverwaltung
           cardWidget([
             const Text(
               "Kategorien",
@@ -59,38 +57,7 @@ class _SettingsState extends State<Settings> {
             ),
           ]),
 
-          // 🔹 Support
-          cardWidget([
-            const Text(
-              "Support",
-              style: TextStyle(
-                fontFamily: "SpaceGrotesk",
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Divider(color: Colors.grey[400]),
-            const SizedBox(height: 8),
-            const Text(
-              "Wenn du Fragen oder Probleme hast, kontaktiere uns gerne per E-Mail.",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
-            ),
-            const SizedBox(height: 12),
-            ElevatedButton.icon(
-              onPressed: _sendSupportEmail,
-              icon: const Icon(Icons.mail_outline),
-              label: const Text(
-                "Support kontaktieren",
-                style: TextStyle(fontFamily: "SpaceGrotesk"),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-              ),
-            ),
-          ]),
-
-          // 🔹 Über die App
+          // Über die App
           cardWidget([
             const Text(
               "Über die App",
@@ -133,30 +100,8 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
-
-  // 🔸 Support-E-Mail senden
-  void _sendSupportEmail() async {
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: 'schmalze6@gmail.com',
-      queryParameters: {'subject': 'Supportanfrage zur App'},
-    );
-
-    if (await canLaunchUrl(emailLaunchUri)) {
-      await launchUrl(emailLaunchUri);
-    } else {
-      _showError("E-Mail-App konnte nicht geöffnet werden.");
-    }
-  }
-
-  void _showError(String message) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
-  }
 }
 
-// 🔸 Wiederverwendbare Card-Funktion
 Widget cardWidget(List<Widget> children) {
   return Card(
     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
