@@ -21,8 +21,7 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
 
   void _loadCategories() {
     final box = Boxes.getBookmarksBox();
-    categories =
-        box.values.expand((b) => b.tags).toSet().toList(); // doppelte entfernen
+    categories = box.values.expand((b) => b.tags).toSet().toList();
   }
 
   void _renameCategory(String oldName, String newName) {
@@ -120,9 +119,7 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const CustomAppBar(
-        title: "Kategorien verwalten",
-      ),
+      appBar: const CustomAppBar(title: "Kategorien verwalten"),
       body: ListView.builder(
         itemCount: categories.length,
         itemBuilder: (context, index) {
