@@ -1,0 +1,77 @@
+{
+  "@@locale": "de",
+  "appTitle": "Bookmarks",
+  "filter": "Filtern",
+  "settings": "Einstellungen",
+  "noBookmarksFound": "Keine Bookmarks gefunden.",
+  "linkCopied": "🔗 Link kopiert: {link}",
+  "@linkCopied": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "addNewBookmark": "Neues Bookmark hinzufügen",
+  "filterOptions": "Filteroptionen",
+  "showFavoritesOnly": "Nur Favoriten anzeigen",
+  "selectCategory": "Kategorie auswählen:",
+  "all": "Alle",
+  "resetFilters": "Filter zurücksetzen",
+  "editBookmark": "Bookmark bearbeiten",
+  "title": "Titel",
+  "link": "Link",
+  "category": "Kategorie",
+  "none": "Keine",
+  "cancel": "Abbrechen",
+  "save": "Speichern",
+  "deleteBookmark": "Bookmark löschen?",
+  "deleteBookmarkMessage": "'{title}' wird dauerhaft gelöscht.",
+  "@deleteBookmarkMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "delete": "Löschen",
+  "newBookmark": "Neues Bookmark",
+  "titleRequired": "Titel *",
+  "linkRequired": "Link *",
+  "titleEmptyError": "Titel darf nicht leer sein",
+  "linkEmptyError": "Link darf nicht leer sein",
+  "selectCategoryDropdown": "Kategorie auswählen",
+  "addNewCategory": "Neue Kategorie hinzufügen",
+  "categoryAdded": "Kategorie '{name}' hinzugefügt",
+  "@categoryAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTitle": "Einstellungen",
+  "categories": "Kategorien",
+  "editOrDeleteCategories": "Bearbeite oder lösche bestehende Kategorien.",
+  "manageCategories": "Kategorien verwalten",
+  "aboutApp": "Über die App",
+  "version": "Version: 1.0.0",
+  "developedBy": "Entwickelt von: Eaven-René Schmalz",
+  "aboutDeveloper": "Über den Entwickler",
+  "errorInitializingHive": "❌ Fehler beim Initialisieren von Hive: {error}",
+  "@errorInitializingHive": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorStartingApp": "Fehler beim Starten der App:\n\n{error}",
+  "@errorStartingApp": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
+}

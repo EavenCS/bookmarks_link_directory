@@ -1,0 +1,77 @@
+{
+  "@@locale": "en",
+  "appTitle": "Bookmarks",
+  "filter": "Filter",
+  "settings": "Settings",
+  "noBookmarksFound": "No bookmarks found.",
+  "linkCopied": "🔗 Link copied: {link}",
+  "@linkCopied": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "addNewBookmark": "Add new bookmark",
+  "filterOptions": "Filter options",
+  "showFavoritesOnly": "Show favorites only",
+  "selectCategory": "Select category:",
+  "all": "All",
+  "resetFilters": "Reset filters",
+  "editBookmark": "Edit bookmark",
+  "title": "Title",
+  "link": "Link",
+  "category": "Category",
+  "none": "None",
+  "cancel": "Cancel",
+  "save": "Save",
+  "deleteBookmark": "Delete bookmark?",
+  "deleteBookmarkMessage": "'{title}' will be permanently deleted.",
+  "@deleteBookmarkMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "delete": "Delete",
+  "newBookmark": "New bookmark",
+  "titleRequired": "Title *",
+  "linkRequired": "Link *",
+  "titleEmptyError": "Title cannot be empty",
+  "linkEmptyError": "Link cannot be empty",
+  "selectCategoryDropdown": "Select category",
+  "addNewCategory": "Add new category",
+  "categoryAdded": "Category '{name}' added",
+  "@categoryAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsTitle": "Settings",
+  "categories": "Categories",
+  "editOrDeleteCategories": "Edit or delete existing categories.",
+  "manageCategories": "Manage categories",
+  "aboutApp": "About the app",
+  "version": "Version: 1.0.0",
+  "developedBy": "Developed by: Eaven-René Schmalz",
+  "aboutDeveloper": "About the developer",
+  "errorInitializingHive": "❌ Error initializing Hive: {error}",
+  "@errorInitializingHive": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "errorStartingApp": "Error starting app:\n\n{error}",
+  "@errorStartingApp": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
+}

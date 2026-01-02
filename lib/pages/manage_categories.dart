@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:link_directory/boxes.dart';
-import 'package:link_directory/model/bookmark.dart';
-import 'package:link_directory/widgets/appbar.dart';
+import '../boxes.dart';
+import '../widgets/appbar.dart';
 
 class ManageCategoriesPage extends StatefulWidget {
   const ManageCategoriesPage({super.key});

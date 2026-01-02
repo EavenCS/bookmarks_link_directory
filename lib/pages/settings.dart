@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:link_directory/pages/about_dev.dart';
-import 'package:link_directory/pages/manage_categories.dart';
-import 'package:link_directory/widgets/appbar.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'about_dev.dart';
+import 'manage_categories.dart';
+import '../widgets/appbar.dart';
+import '../l10n/app_localizations.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -14,17 +14,17 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: const CustomAppBar(title: "Einstellungen"),
+      appBar: CustomAppBar(title: l10n.settingsTitle),
       backgroundColor: Colors.white,
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16),
         children: [
-          // 🔹 Kategorienverwaltung
           cardWidget([
-            const Text(
-              "Kategorien",
-              style: TextStyle(
+            Text(
+              l10n.categories,
+              style: const TextStyle(
                 fontFamily: "SpaceGrotesk",
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -32,9 +32,9 @@ class _SettingsState extends State<Settings> {
             ),
             Divider(color: Colors.grey[400]),
             const SizedBox(height: 8),
-            const Text(
-              "Bearbeite oder lösche bestehende Kategorien.",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
+            Text(
+              l10n.editOrDeleteCategories,
+              style: const TextStyle(fontFamily: "SpaceGrotesk"),
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
@@ -46,9 +46,9 @@ class _SettingsState extends State<Settings> {
                 );
               },
               icon: const Icon(Icons.category),
-              label: const Text(
-                "Kategorien verwalten",
-                style: TextStyle(fontFamily: "SpaceGrotesk"),
+              label: Text(
+                l10n.manageCategories,
+                style: const TextStyle(fontFamily: "SpaceGrotesk"),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
@@ -57,11 +57,10 @@ class _SettingsState extends State<Settings> {
             ),
           ]),
 
-          // Über die App
           cardWidget([
-            const Text(
-              "Über die App",
-              style: TextStyle(
+            Text(
+              l10n.aboutApp,
+              style: const TextStyle(
                 fontFamily: "SpaceGrotesk",
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -69,14 +68,14 @@ class _SettingsState extends State<Settings> {
             ),
             Divider(color: Colors.grey[400]),
             const SizedBox(height: 8),
-            const Text(
-              "Version: 1.0.0",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
+            Text(
+              l10n.version,
+              style: const TextStyle(fontFamily: "SpaceGrotesk"),
             ),
             const SizedBox(height: 4),
-            const Text(
-              "Entwickelt von: Eaven-René Schmalz",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
+            Text(
+              l10n.developedBy,
+              style: const TextStyle(fontFamily: "SpaceGrotesk"),
             ),
             const SizedBox(height: 12),
             ElevatedButton.icon(
@@ -86,9 +85,9 @@ class _SettingsState extends State<Settings> {
                 ).push(MaterialPageRoute(builder: (_) => const AboutDevPage()));
               },
               icon: const Icon(Icons.person_outline),
-              label: const Text(
-                "Über den Entwickler",
-                style: TextStyle(fontFamily: "SpaceGrotesk"),
+              label: Text(
+                l10n.aboutDeveloper,
+                style: const TextStyle(fontFamily: "SpaceGrotesk"),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,

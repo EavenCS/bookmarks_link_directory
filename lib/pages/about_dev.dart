@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:link_directory/widgets/appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../widgets/appbar.dart';
 
 class AboutDevPage extends StatelessWidget {
   const AboutDevPage({super.key});

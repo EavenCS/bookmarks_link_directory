@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:link_directory/model/bookmark.dart';
-import 'package:link_directory/boxes.dart';
-import 'package:link_directory/widgets/appbar.dart';
+import '../model/bookmark.dart';
+import '../boxes.dart';
+import '../widgets/appbar.dart';
+import '../l10n/app_localizations.dart';
 
 class AddLink extends StatefulWidget {
   const AddLink({super.key});
@@ -31,18 +31,19 @@ class _AddLinkState extends State<AddLink> {
   }
 
   void _addCategory(String name) {
+    final l10n = AppLocalizations.of(context)!;
     if (name.isEmpty) return;
     if (!categories.contains(name)) {
       setState(() {
         categories.add(name);
         categories.sort();
-        selectedValue = name; // 🔹 Neue Kategorie automatisch auswählen
+        selectedValue = name;
       });
       categoryController.clear();
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text("Kategorie '$name' hinzugefügt"),
+          content: Text(l10n.categoryAdded(name)),
           backgroundColor: Colors.black87,
           duration: const Duration(seconds: 2),
         ),
@@ -71,10 +72,11 @@ class _AddLinkState extends State<AddLink> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const CustomAppBar(
-        title: "Neues Bookmark",
+      appBar: CustomAppBar(
+        title: l10n.newBookmark,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -84,42 +86,39 @@ class _AddLinkState extends State<AddLink> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 🔹 Titel (Pflichtfeld)
                 TextFormField(
                   controller: titleController,
-                  decoration: const InputDecoration(
-                    labelText: "Titel *",
-                    border: OutlineInputBorder(),
-                    labelStyle: TextStyle(fontFamily: "SpaceGrotesk"),
+                  decoration: InputDecoration(
+                    labelText: l10n.titleRequired,
+                    border: const OutlineInputBorder(),
+                    labelStyle: const TextStyle(fontFamily: "SpaceGrotesk"),
                   ),
                   validator:
                       (value) =>
                           value == null || value.trim().isEmpty
-                              ? "Titel darf nicht leer sein"
+                              ? l10n.titleEmptyError
                               : null,
                 ),
                 const SizedBox(height: 16),
 
-                // 🔹 Link (Pflichtfeld)
                 TextFormField(
                   controller: linkController,
-                  decoration: const InputDecoration(
-                    labelText: "Link *",
-                    border: OutlineInputBorder(),
-                    labelStyle: TextStyle(fontFamily: "SpaceGrotesk"),
+                  decoration: InputDecoration(
+                    labelText: l10n.linkRequired,
+                    border: const OutlineInputBorder(),
+                    labelStyle: const TextStyle(fontFamily: "SpaceGrotesk"),
                   ),
                   validator:
                       (value) =>
                           value == null || value.trim().isEmpty
-                              ? "Link darf nicht leer sein"
+                              ? l10n.linkEmptyError
                               : null,
                 ),
                 const SizedBox(height: 20),
 
-                // 🔹 Kategorie Dropdown (aus vorhandenen Bookmarks)
                 DropdownButtonFormField<String>(
                   decoration: InputDecoration(
-                    labelText: "Kategorie auswählen",
+                    labelText: l10n.selectCategoryDropdown,
                     labelStyle: const TextStyle(fontFamily: "SpaceGrotesk"),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
@@ -129,7 +128,7 @@ class _AddLinkState extends State<AddLink> {
                       vertical: 14,
                     ),
                   ),
-                  value: selectedValue,
+                  initialValue: selectedValue,
                   items:
                       categories
                           .map(
@@ -157,7 +156,7 @@ class _AddLinkState extends State<AddLink> {
                       child: TextField(
                         controller: categoryController,
                         decoration: InputDecoration(
-                          labelText: "Neue Kategorie hinzufügen",
+                          labelText: l10n.addNewCategory,
                           labelStyle: const TextStyle(
                             fontFamily: "SpaceGrotesk",
                             fontSize: 15,
@@ -188,7 +187,6 @@ class _AddLinkState extends State<AddLink> {
 
                 const SizedBox(height: 30),
 
-                // 🔹 Speichern-Button
                 Center(
                   child: ElevatedButton(
                     onPressed: _saveBookmark,
@@ -204,9 +202,9 @@ class _AddLinkState extends State<AddLink> {
                       ),
                       elevation: 0,
                     ),
-                    child: const Text(
-                      "Speichern",
-                      style: TextStyle(
+                    child: Text(
+                      l10n.save,
+                      style: const TextStyle(
                         fontFamily: "SpaceGrotesk",
                         fontWeight: FontWeight.w700,
                         fontSize: 16,

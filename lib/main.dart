@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:link_directory/model/bookmark.dart';
-import 'package:link_directory/homepage.dart';
-import 'package:link_directory/boxes.dart';
+import 'model/bookmark.dart';
+import 'homepage.dart';
+import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   try {
-    final appDir = await getApplicationDocumentsDirectory();
-    await Hive.initFlutter(appDir.path);
+    await Hive.initFlutter();
 
     Hive.registerAdapter(BookmarkAdapter());
 
     await Hive.openBox<Bookmark>('bookmarks');
-
-    final box = Hive.box<Bookmark>('bookmarks');
-    for (var b in box.values) {
-      if (b.tags == null) {
-        b.tags = [];
-        await b.save();
-      }
-    }
 
     runApp(const MyApp());
   } catch (e, stackTrace) {
@@ -58,6 +49,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('de'),
+        Locale('en'),
+      ],
       home: const HomePage(),
     );
   }

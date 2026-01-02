@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/services.dart';
-import 'package:link_directory/boxes.dart';
-import 'package:link_directory/model/bookmark.dart';
-import 'package:link_directory/pages/add_link.dart';
-import 'package:link_directory/pages/settings.dart';
-import 'package:link_directory/widgets/appbar.dart';
+import 'boxes.dart';
+import 'model/bookmark.dart';
+import 'pages/add_link.dart';
+import 'pages/settings.dart';
+import 'widgets/appbar.dart';
+import 'l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,20 +22,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: "Bookmarks",
+        title: l10n.appTitle,
         centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_list, color: Colors.black),
-            tooltip: "Filtern",
+            tooltip: l10n.filter,
             onPressed: () => _showFilterOptions(context),
           ),
           IconButton(
             icon: const Icon(Icons.settings),
-            tooltip: "Einstellungen",
+            tooltip: l10n.settings,
             onPressed: () {
               Navigator.push(
                 context,
@@ -50,9 +52,6 @@ class _HomePageState extends State<HomePage> {
         builder: (context, box, _) {
           final bookmarks = box.values.toList().cast<Bookmark>();
 
-          final allCategories =
-              bookmarks.expand((b) => b.tags).toSet().toList();
-
           final filtered =
               bookmarks.where((b) {
                 final matchesCategory =
@@ -63,10 +62,10 @@ class _HomePageState extends State<HomePage> {
               }).toList();
 
           if (filtered.isEmpty) {
-            return const Center(
+            return Center(
               child: Text(
-                "Keine Bookmarks gefunden.",
-                style: TextStyle(
+                l10n.noBookmarksFound,
+                style: const TextStyle(
                   fontFamily: "SpaceGrotesk",
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
@@ -102,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                           b.save();
                         });
                       },
-                      backgroundColor: Colors.amber.withOpacity(0.1),
+                      backgroundColor: Colors.amber.withValues(alpha: 0.1),
                       foregroundColor: Colors.amber.shade800,
                       icon: b.isFavorite ? Icons.star_border : Icons.star,
                     ),
@@ -118,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                         HapticFeedback.selectionClick();
                         _editBookmark(b);
                       },
-                      backgroundColor: Colors.blueAccent.withOpacity(0.1),
+                      backgroundColor: Colors.blueAccent.withValues(alpha: 0.1),
                       foregroundColor: Colors.blueAccent,
                       icon: Icons.edit,
                     ),
@@ -127,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                         HapticFeedback.heavyImpact();
                         _confirmDelete(b);
                       },
-                      backgroundColor: Colors.redAccent.withOpacity(0.1),
+                      backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
                       foregroundColor: Colors.redAccent,
                       icon: Icons.delete,
                     ),
@@ -187,12 +186,14 @@ class _HomePageState extends State<HomePage> {
 
                   onTap: () async {
                     await Clipboard.setData(ClipboardData(text: b.link));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("🔗 Link kopiert: ${b.link}"),
-                        duration: const Duration(seconds: 2),
-                      ),
-                    );
+                    if (mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(l10n.linkCopied(b.link)),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    }
                   },
                 ),
               );
@@ -211,13 +212,14 @@ class _HomePageState extends State<HomePage> {
             MaterialPageRoute(builder: (_) => const AddLink()),
           );
         },
-        tooltip: 'Neues Bookmark hinzufügen',
+        tooltip: l10n.addNewBookmark,
         child: const Icon(Icons.add),
       ),
     );
   }
 
   void _showFilterOptions(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final box = Boxes.getBookmarksBox();
     final allCategories = box.values.expand((b) => b.tags).toSet().toList();
 
@@ -236,9 +238,9 @@ class _HomePageState extends State<HomePage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Filteroptionen",
-                    style: TextStyle(
+                  Text(
+                    l10n.filterOptions,
+                    style: const TextStyle(
                       fontFamily: "SpaceGrotesk",
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -247,9 +249,9 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 20),
 
                   SwitchListTile(
-                    title: const Text(
-                      "Nur Favoriten anzeigen",
-                      style: TextStyle(fontFamily: "SpaceGrotesk"),
+                    title: Text(
+                      l10n.showFavoritesOnly,
+                      style: const TextStyle(fontFamily: "SpaceGrotesk"),
                     ),
                     value: showFavoritesOnly,
                     onChanged: (val) {
@@ -259,9 +261,9 @@ class _HomePageState extends State<HomePage> {
                   ),
 
                   const Divider(),
-                  const Text(
-                    "Kategorie auswählen:",
-                    style: TextStyle(
+                  Text(
+                    l10n.selectCategory,
+                    style: const TextStyle(
                       fontFamily: "SpaceGrotesk",
                       fontWeight: FontWeight.w600,
                     ),
@@ -269,17 +271,17 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 10),
 
                   DropdownButtonFormField<String>(
-                    value: selectedCategory,
-                    hint: const Text(
-                      "Alle",
-                      style: TextStyle(fontFamily: "SpaceGrotesk"),
+                    initialValue: selectedCategory,
+                    hint: Text(
+                      l10n.all,
+                      style: const TextStyle(fontFamily: "SpaceGrotesk"),
                     ),
                     items: [
-                      const DropdownMenuItem(
+                      DropdownMenuItem(
                         value: null,
                         child: Text(
-                          "Alle",
-                          style: TextStyle(fontFamily: "SpaceGrotesk"),
+                          l10n.all,
+                          style: const TextStyle(fontFamily: "SpaceGrotesk"),
                         ),
                       ),
                       ...allCategories.map(
@@ -310,9 +312,9 @@ class _HomePageState extends State<HomePage> {
                   Center(
                     child: ElevatedButton.icon(
                       icon: const Icon(Icons.clear),
-                      label: const Text(
-                        "Filter zurücksetzen",
-                        style: TextStyle(fontFamily: "SpaceGrotesk"),
+                      label: Text(
+                        l10n.resetFilters,
+                        style: const TextStyle(fontFamily: "SpaceGrotesk"),
                       ),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
@@ -344,6 +346,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _editBookmark(Bookmark b) {
+    final l10n = AppLocalizations.of(context)!;
     final titleController = TextEditingController(text: b.title);
     final linkController = TextEditingController(text: b.link);
     final allCategories =
@@ -355,9 +358,9 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder:
           (_) => AlertDialog(
-            title: const Text(
-              "Bookmark bearbeiten",
-              style: TextStyle(
+            title: Text(
+              l10n.editBookmark,
+              style: const TextStyle(
                 fontFamily: "SpaceGrotesk",
                 fontWeight: FontWeight.bold,
               ),
@@ -367,17 +370,17 @@ class _HomePageState extends State<HomePage> {
               children: [
                 TextField(
                   controller: titleController,
-                  decoration: const InputDecoration(
-                    labelText: "Titel",
-                    labelStyle: TextStyle(fontFamily: "SpaceGrotesk"),
+                  decoration: InputDecoration(
+                    labelText: l10n.title,
+                    labelStyle: const TextStyle(fontFamily: "SpaceGrotesk"),
                   ),
                 ),
                 const SizedBox(height: 10),
                 TextField(
                   controller: linkController,
-                  decoration: const InputDecoration(
-                    labelText: "Link",
-                    labelStyle: TextStyle(fontFamily: "SpaceGrotesk"),
+                  decoration: InputDecoration(
+                    labelText: l10n.link,
+                    labelStyle: const TextStyle(fontFamily: "SpaceGrotesk"),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -396,11 +399,11 @@ class _HomePageState extends State<HomePage> {
                   child: AbsorbPointer(
                     child: TextField(
                       decoration: InputDecoration(
-                        labelText: "Kategorie",
+                        labelText: l10n.category,
                         labelStyle: const TextStyle(fontFamily: "SpaceGrotesk"),
                         suffixIcon: const Icon(Icons.arrow_drop_down),
                         border: const OutlineInputBorder(),
-                        hintText: selectedCategory ?? "Keine",
+                        hintText: selectedCategory ?? l10n.none,
                       ),
                       controller: TextEditingController(
                         text: selectedCategory ?? "",
@@ -413,9 +416,9 @@ class _HomePageState extends State<HomePage> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  "Abbrechen",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
+                child: Text(
+                  l10n.cancel,
+                  style: const TextStyle(fontFamily: "SpaceGrotesk"),
                 ),
               ),
               ElevatedButton(
@@ -433,9 +436,9 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
                 ),
-                child: const Text(
-                  "Speichern",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
+                child: Text(
+                  l10n.save,
+                  style: const TextStyle(fontFamily: "SpaceGrotesk"),
                 ),
               ),
             ],
@@ -449,6 +452,7 @@ class _HomePageState extends State<HomePage> {
     String? selectedCategory,
     Function(String?) onSelect,
   ) {
+    final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.white,
@@ -460,11 +464,11 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(16),
+              Padding(
+                padding: const EdgeInsets.all(16),
                 child: Text(
-                  "Kategorie auswählen",
-                  style: TextStyle(
+                  l10n.selectCategoryDropdown,
+                  style: const TextStyle(
                     fontFamily: "SpaceGrotesk",
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -473,9 +477,9 @@ class _HomePageState extends State<HomePage> {
               ),
               const Divider(height: 1),
               ListTile(
-                title: const Text(
-                  "Keine",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
+                title: Text(
+                  l10n.none,
+                  style: const TextStyle(fontFamily: "SpaceGrotesk"),
                 ),
                 onTap: () {
                   onSelect(null);
@@ -508,24 +512,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _confirmDelete(Bookmark b) {
+    final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder:
           (_) => AlertDialog(
-            title: const Text(
-              "Bookmark löschen?",
-              style: TextStyle(fontFamily: "SpaceGrotesk"),
+            title: Text(
+              l10n.deleteBookmark,
+              style: const TextStyle(fontFamily: "SpaceGrotesk"),
             ),
             content: Text(
-              "'${b.title}' wird dauerhaft gelöscht.",
+              l10n.deleteBookmarkMessage(b.title),
               style: const TextStyle(fontFamily: "SpaceGrotesk"),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  "Abbrechen",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
+                child: Text(
+                  l10n.cancel,
+                  style: const TextStyle(fontFamily: "SpaceGrotesk"),
                 ),
               ),
               ElevatedButton(
@@ -533,7 +538,7 @@ class _HomePageState extends State<HomePage> {
                   HapticFeedback.heavyImpact();
 
                   final box = Boxes.getBookmarksBox();
-                  box.delete(b.key); // <- wichtig
+                  box.delete(b.key);
 
                   Navigator.pop(context);
                 },
@@ -541,9 +546,9 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: Colors.redAccent,
                   foregroundColor: Colors.white,
                 ),
-                child: const Text(
-                  "Löschen",
-                  style: TextStyle(fontFamily: "SpaceGrotesk"),
+                child: Text(
+                  l10n.delete,
+                  style: const TextStyle(fontFamily: "SpaceGrotesk"),
                 ),
               ),
             ],
