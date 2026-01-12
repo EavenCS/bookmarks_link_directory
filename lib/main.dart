@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'model/bookmark.dart';
+import 'model/category.dart';
 import 'homepage.dart';
 import 'l10n/app_localizations.dart';
 
@@ -12,8 +13,10 @@ void main() async {
     await Hive.initFlutter();
 
     Hive.registerAdapter(BookmarkAdapter());
+    Hive.registerAdapter(CategoryAdapter());
 
     await Hive.openBox<Bookmark>('bookmarks');
+    await Hive.openBox<Category>('categories');
 
     runApp(const MyApp());
   } catch (e, stackTrace) {

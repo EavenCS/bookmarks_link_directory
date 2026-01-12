@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../model/bookmark.dart';
+import '../model/category.dart';
 import '../boxes.dart';
 import '../widgets/appbar.dart';
 import '../l10n/app_localizations.dart';
@@ -24,9 +25,12 @@ class _AddLinkState extends State<AddLink> {
   @override
   void initState() {
     super.initState();
-    // 🔹 Alle Tags aus gespeicherten Bookmarks ableiten
-    final box = Boxes.getBookmarksBox();
-    categories = box.values.expand((b) => b.tags).toSet().toList();
+    _loadCategories();
+  }
+
+  void _loadCategories() {
+    final categoriesBox = Boxes.getCategoriesBox();
+    categories = categoriesBox.values.map((c) => c.name).toList();
     categories.sort();
   }
 
@@ -34,6 +38,11 @@ class _AddLinkState extends State<AddLink> {
     final l10n = AppLocalizations.of(context)!;
     if (name.isEmpty) return;
     if (!categories.contains(name)) {
+      // Kategorie persistent speichern
+      final categoriesBox = Boxes.getCategoriesBox();
+      final category = Category(name: name);
+      categoriesBox.add(category);
+
       setState(() {
         categories.add(name);
         categories.sort();
