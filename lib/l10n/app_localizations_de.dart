@@ -127,7 +127,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get aboutApp => 'Über die App';
 
   @override
-  String get version => 'Version: 1.1.0';
+  String get version => 'Version: 1.0.1';
 
   @override
   String get developedBy => 'Entwickelt von: Eaven-René Schmalz';
