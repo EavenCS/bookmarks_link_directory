@@ -459,7 +459,7 @@ class _HomePageState extends State<HomePage> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      builder: (_) {
+      builder: (BuildContext bottomSheetContext) {
         return SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.min,

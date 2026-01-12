@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/appbar.dart';
+import '../l10n/app_localizations.dart';
 
 class AboutDevPage extends StatelessWidget {
   const AboutDevPage({super.key});
 
-  void _launchURL(String url) async {
+  void _launchURL(BuildContext context, String url) async {
+    final l10n = AppLocalizations.of(context)!;
     final uri = Uri.parse(url);
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      throw Exception('Konnte $url nicht öffnen');
+      throw Exception(l10n.couldNotOpen(url));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: const CustomAppBar(title: "Über den Entwickler"),
+      appBar: CustomAppBar(title: l10n.aboutDeveloperTitle),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -25,7 +28,7 @@ class AboutDevPage extends StatelessWidget {
             radius: 60,
             backgroundImage: AssetImage(
               'assets/dev_avatar.png',
-            ), // Dein Profilbild
+            ),
           ),
           const SizedBox(height: 20),
           Text(
@@ -46,11 +49,10 @@ class AboutDevPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          const Text(
-            "Hi, ich bin Eaven! Ich entwickle mit Liebe minimalistische und durchdachte Flutter-Apps. "
-            "Diese App ist ein kleines Herzensprojekt von mir – danke, dass du sie verwendest!",
+          Text(
+            l10n.aboutDeveloperText,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: "SpaceGrotesk",
               fontWeight: FontWeight.bold,
             ),
@@ -59,39 +61,40 @@ class AboutDevPage extends StatelessWidget {
           Divider(color: Colors.grey[400]),
           ListTile(
             leading: const Icon(Icons.link),
-            title: const Text(
-              "Website",
-              style: TextStyle(
+            title: Text(
+              l10n.website,
+              style: const TextStyle(
                 fontFamily: "SpaceGrotesk",
                 fontWeight: FontWeight.bold,
               ),
             ),
             onTap:
                 () => _launchURL(
+                  context,
                   "https://eavencs.github.io/PortfolioCV.Frontend/pages/index.html",
                 ),
           ),
           ListTile(
             leading: const Icon(Icons.email),
-            title: const Text(
-              "E-Mail",
-              style: TextStyle(
+            title: Text(
+              l10n.email,
+              style: const TextStyle(
                 fontFamily: "SpaceGrotesk",
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onTap: () => _launchURL("mailto:Schmalze6@gmail.com"),
+            onTap: () => _launchURL(context, "mailto:Schmalze6@gmail.com"),
           ),
           ListTile(
             leading: const Icon(Icons.code),
-            title: const Text(
-              "GitHub",
-              style: TextStyle(
+            title: Text(
+              l10n.github,
+              style: const TextStyle(
                 fontFamily: "SpaceGrotesk",
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onTap: () => _launchURL("https://github.com/EavenCS"),
+            onTap: () => _launchURL(context, "https://github.com/EavenCS"),
           ),
         ],
       ),

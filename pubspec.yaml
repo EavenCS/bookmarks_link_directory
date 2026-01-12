@@ -1,5 +1,5 @@
-name: Bookmarks
-description: "The only link collection you need."
+name: bookmarks_link_directory
+description: "Bookmarks Link Directory - The only link collection you need."
 publish_to: "none"
 
 version: 1.0.0+1
