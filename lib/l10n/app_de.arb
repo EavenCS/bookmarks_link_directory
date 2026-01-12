@@ -73,5 +73,31 @@
         "type": "String"
       }
     }
-  }
+  },
+  "manageCategoriesTitle": "Kategorien verwalten",
+  "renameCategory": "Kategorie umbenennen",
+  "newName": "Neuer Name",
+  "deleteCategory": "Kategorie löschen?",
+  "deleteCategoryMessage": "Die Kategorie '{name}' wird aus allen Bookmarks entfernt.",
+  "@deleteCategoryMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutDeveloperTitle": "Über den Entwickler",
+  "aboutDeveloperText": "Hi, ich bin Eaven! Ich entwickle mit Liebe minimalistische und durchdachte Flutter-Apps. Diese App ist ein kleines Herzensprojekt von mir – danke, dass du sie verwendest!",
+  "website": "Website",
+  "email": "E-Mail",
+  "github": "GitHub",
+  "couldNotOpen": "Konnte {url} nicht öffnen",
+  "@couldNotOpen": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "noCategoriesFound": "Noch keine Kategorien gefunden."
 }

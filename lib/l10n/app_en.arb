@@ -73,5 +73,31 @@
         "type": "String"
       }
     }
-  }
+  },
+  "manageCategoriesTitle": "Manage Categories",
+  "renameCategory": "Rename Category",
+  "newName": "New name",
+  "deleteCategory": "Delete category?",
+  "deleteCategoryMessage": "The category '{name}' will be removed from all bookmarks.",
+  "@deleteCategoryMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "aboutDeveloperTitle": "About the Developer",
+  "aboutDeveloperText": "Hi, I'm Eaven! I love creating minimalist and thoughtful Flutter apps. This app is a little passion project of mine – thank you for using it!",
+  "website": "Website",
+  "email": "E-Mail",
+  "github": "GitHub",
+  "couldNotOpen": "Could not open {url}",
+  "@couldNotOpen": {
+    "placeholders": {
+      "url": {
+        "type": "String"
+      }
+    }
+  },
+  "noCategoriesFound": "No categories found yet."
 }

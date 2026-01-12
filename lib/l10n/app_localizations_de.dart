@@ -135,4 +135,45 @@ class AppLocalizationsDe extends AppLocalizations {
   String errorStartingApp(String error) {
     return 'Fehler beim Starten der App:\n\n$error';
   }
+
+  @override
+  String get manageCategoriesTitle => 'Kategorien verwalten';
+
+  @override
+  String get renameCategory => 'Kategorie umbenennen';
+
+  @override
+  String get newName => 'Neuer Name';
+
+  @override
+  String get deleteCategory => 'Kategorie löschen?';
+
+  @override
+  String deleteCategoryMessage(String name) {
+    return 'Die Kategorie \'$name\' wird aus allen Bookmarks entfernt.';
+  }
+
+  @override
+  String get aboutDeveloperTitle => 'Über den Entwickler';
+
+  @override
+  String get aboutDeveloperText =>
+      'Hi, ich bin Eaven! Ich entwickle mit Liebe minimalistische und durchdachte Flutter-Apps. Diese App ist ein kleines Herzensprojekt von mir – danke, dass du sie verwendest!';
+
+  @override
+  String get website => 'Website';
+
+  @override
+  String get email => 'E-Mail';
+
+  @override
+  String get github => 'GitHub';
+
+  @override
+  String couldNotOpen(String url) {
+    return 'Konnte $url nicht öffnen';
+  }
+
+  @override
+  String get noCategoriesFound => 'Noch keine Kategorien gefunden.';
 }

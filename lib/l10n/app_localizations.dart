@@ -331,6 +331,78 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Fehler beim Starten der App:\n\n{error}'**
   String errorStartingApp(String error);
+
+  /// No description provided for @manageCategoriesTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategorien verwalten'**
+  String get manageCategoriesTitle;
+
+  /// No description provided for @renameCategory.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategorie umbenennen'**
+  String get renameCategory;
+
+  /// No description provided for @newName.
+  ///
+  /// In de, this message translates to:
+  /// **'Neuer Name'**
+  String get newName;
+
+  /// No description provided for @deleteCategory.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategorie löschen?'**
+  String get deleteCategory;
+
+  /// No description provided for @deleteCategoryMessage.
+  ///
+  /// In de, this message translates to:
+  /// **'Die Kategorie \'{name}\' wird aus allen Bookmarks entfernt.'**
+  String deleteCategoryMessage(String name);
+
+  /// No description provided for @aboutDeveloperTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Über den Entwickler'**
+  String get aboutDeveloperTitle;
+
+  /// No description provided for @aboutDeveloperText.
+  ///
+  /// In de, this message translates to:
+  /// **'Hi, ich bin Eaven! Ich entwickle mit Liebe minimalistische und durchdachte Flutter-Apps. Diese App ist ein kleines Herzensprojekt von mir – danke, dass du sie verwendest!'**
+  String get aboutDeveloperText;
+
+  /// No description provided for @website.
+  ///
+  /// In de, this message translates to:
+  /// **'Website'**
+  String get website;
+
+  /// No description provided for @email.
+  ///
+  /// In de, this message translates to:
+  /// **'E-Mail'**
+  String get email;
+
+  /// No description provided for @github.
+  ///
+  /// In de, this message translates to:
+  /// **'GitHub'**
+  String get github;
+
+  /// No description provided for @couldNotOpen.
+  ///
+  /// In de, this message translates to:
+  /// **'Konnte {url} nicht öffnen'**
+  String couldNotOpen(String url);
+
+  /// No description provided for @noCategoriesFound.
+  ///
+  /// In de, this message translates to:
+  /// **'Noch keine Kategorien gefunden.'**
+  String get noCategoriesFound;
 }
 
 class _AppLocalizationsDelegate
