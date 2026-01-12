@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'about_dev.dart';
 import 'manage_categories.dart';
 import 'impressum.dart';
 import '../widgets/appbar.dart';
 import '../l10n/app_localizations.dart';
+import '../providers/theme_provider.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -16,12 +18,44 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: CustomAppBar(title: l10n.settingsTitle),
-      backgroundColor: Colors.white,
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16),
         children: [
+          cardWidget([
+            Text(
+              l10n.appearance,
+              style: const TextStyle(
+                fontFamily: "SpaceGrotesk",
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Divider(color: Colors.grey[400]),
+            const SizedBox(height: 8),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(
+                l10n.darkMode,
+                style: const TextStyle(fontFamily: "SpaceGrotesk"),
+              ),
+              subtitle: Text(
+                l10n.darkModeDescription,
+                style: const TextStyle(
+                  fontFamily: "SpaceGrotesk",
+                  fontSize: 12,
+                ),
+              ),
+              value: themeProvider.isDarkMode,
+              onChanged: (value) {
+                themeProvider.toggleTheme();
+              },
+            ),
+          ]),
+
           cardWidget([
             Text(
               l10n.categories,
@@ -51,10 +85,7 @@ class _SettingsState extends State<Settings> {
                 l10n.manageCategories,
                 style: const TextStyle(fontFamily: "SpaceGrotesk"),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-              ),
+              style: ElevatedButton.styleFrom(),
             ),
           ]),
 
@@ -90,10 +121,7 @@ class _SettingsState extends State<Settings> {
                 l10n.aboutDeveloper,
                 style: const TextStyle(fontFamily: "SpaceGrotesk"),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-              ),
+              style: ElevatedButton.styleFrom(),
             ),
             const SizedBox(height: 8),
             ElevatedButton.icon(
@@ -107,10 +135,7 @@ class _SettingsState extends State<Settings> {
                 l10n.impressumTitle,
                 style: const TextStyle(fontFamily: "SpaceGrotesk"),
               ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-              ),
+              style: ElevatedButton.styleFrom(),
             ),
           ]),
         ],

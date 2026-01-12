@@ -105,6 +105,15 @@ class AppLocalizationsDe extends AppLocalizations {
   String get settingsTitle => 'Einstellungen';
 
   @override
+  String get appearance => 'Erscheinungsbild';
+
+  @override
+  String get darkMode => 'Dunkler Modus';
+
+  @override
+  String get darkModeDescription => 'Dunkles Design für die App aktivieren';
+
+  @override
   String get categories => 'Kategorien';
 
   @override

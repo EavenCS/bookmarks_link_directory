@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../boxes.dart';
-import '../model/category.dart';
 import '../widgets/appbar.dart';
 import '../l10n/app_localizations.dart';
 
@@ -56,8 +55,9 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
   void _deleteCategory(String name) {
     // Kategorie aus der Kategorien-Box löschen
     final categoriesBox = Boxes.getCategoriesBox();
-    final categoryToDelete = categoriesBox.values
-        .firstWhere((c) => c.name == name);
+    final categoryToDelete = categoriesBox.values.firstWhere(
+      (c) => c.name == name,
+    );
     categoryToDelete.delete();
 
     // Auch aus allen Bookmarks entfernen
@@ -139,53 +139,59 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: CustomAppBar(title: l10n.manageCategoriesTitle),
-      body: categories.isEmpty
-          ? Center(
-              child: Text(
-                l10n.noCategoriesFound,
-                style: const TextStyle(
-                  fontFamily: "SpaceGrotesk",
-                  fontSize: 16,
-                  color: Colors.grey,
+      body:
+          categories.isEmpty
+              ? Center(
+                child: Text(
+                  l10n.noCategoriesFound,
+                  style: const TextStyle(
+                    fontFamily: "SpaceGrotesk",
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-            )
-          : ListView.builder(
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                final name = categories[index];
-                return Card(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  child: ListTile(
-                    title: Text(
-                      name,
-                      style: const TextStyle(
-                        fontFamily: "SpaceGrotesk",
-                        fontWeight: FontWeight.w600,
+              )
+              : ListView.builder(
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  final name = categories[index];
+                  return Card(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    child: ListTile(
+                      title: Text(
+                        name,
+                        style: const TextStyle(
+                          fontFamily: "SpaceGrotesk",
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.edit,
+                              color: Colors.blueAccent,
+                            ),
+                            onPressed: () => _showRenameDialog(name),
+                          ),
+                          IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.redAccent,
+                            ),
+                            onPressed: () => _confirmDelete(name),
+                          ),
+                        ],
                       ),
                     ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon:
-                              const Icon(Icons.edit, color: Colors.blueAccent),
-                          onPressed: () => _showRenameDialog(name),
-                        ),
-                        IconButton(
-                          icon:
-                              const Icon(Icons.delete, color: Colors.redAccent),
-                          onPressed: () => _confirmDelete(name),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
+                  );
+                },
+              ),
     );
   }
 }

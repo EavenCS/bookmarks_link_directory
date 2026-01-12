@@ -53,7 +53,6 @@ class _AddLinkState extends State<AddLink> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(l10n.categoryAdded(name)),
-          backgroundColor: Colors.black87,
           duration: const Duration(seconds: 2),
         ),
       );
@@ -83,7 +82,6 @@ class _AddLinkState extends State<AddLink> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: CustomAppBar(
         title: l10n.newBookmark,
       ),
@@ -181,8 +179,6 @@ class _AddLinkState extends State<AddLink> {
                       onPressed:
                           () => _addCategory(categoryController.text.trim()),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14),
                         ),
@@ -200,8 +196,6 @@ class _AddLinkState extends State<AddLink> {
                   child: ElevatedButton(
                     onPressed: _saveBookmark,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 26,
                         vertical: 14,

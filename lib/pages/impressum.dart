@@ -24,7 +24,6 @@ class ImpressumPage extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: CustomAppBar(title: l10n.impressumTitle),
       body: ListView(
         padding: const EdgeInsets.all(20),

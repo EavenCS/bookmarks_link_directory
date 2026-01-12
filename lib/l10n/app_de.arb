@@ -51,6 +51,9 @@
     }
   },
   "settingsTitle": "Einstellungen",
+  "appearance": "Erscheinungsbild",
+  "darkMode": "Dunkler Modus",
+  "darkModeDescription": "Dunkles Design für die App aktivieren",
   "categories": "Kategorien",
   "editOrDeleteCategories": "Bearbeite oder lösche bestehende Kategorien.",
   "manageCategories": "Kategorien verwalten",

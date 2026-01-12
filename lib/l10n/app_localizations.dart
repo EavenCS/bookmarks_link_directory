@@ -278,6 +278,24 @@ abstract class AppLocalizations {
   /// **'Einstellungen'**
   String get settingsTitle;
 
+  /// No description provided for @appearance.
+  ///
+  /// In de, this message translates to:
+  /// **'Erscheinungsbild'**
+  String get appearance;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In de, this message translates to:
+  /// **'Dunkler Modus'**
+  String get darkMode;
+
+  /// No description provided for @darkModeDescription.
+  ///
+  /// In de, this message translates to:
+  /// **'Dunkles Design für die App aktivieren'**
+  String get darkModeDescription;
+
   /// No description provided for @categories.
   ///
   /// In de, this message translates to:

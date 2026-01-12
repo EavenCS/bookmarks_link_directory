@@ -51,6 +51,9 @@
     }
   },
   "settingsTitle": "Settings",
+  "appearance": "Appearance",
+  "darkMode": "Dark Mode",
+  "darkModeDescription": "Enable dark theme for the app",
   "categories": "Categories",
   "editOrDeleteCategories": "Edit or delete existing categories.",
   "manageCategories": "Manage categories",

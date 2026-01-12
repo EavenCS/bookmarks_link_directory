@@ -24,13 +24,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: CustomAppBar(
         title: l10n.appTitle,
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.filter_list, color: Colors.black),
+            icon: const Icon(Icons.filter_list),
             tooltip: l10n.filter,
             onPressed: () => _showFilterOptions(context),
           ),
@@ -203,8 +202,6 @@ class _HomePageState extends State<HomePage> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         onPressed: () {
           Navigator.push(
@@ -225,7 +222,6 @@ class _HomePageState extends State<HomePage> {
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
@@ -317,8 +313,6 @@ class _HomePageState extends State<HomePage> {
                         style: const TextStyle(fontFamily: "SpaceGrotesk"),
                       ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20,
                           vertical: 12,
@@ -432,10 +426,7 @@ class _HomePageState extends State<HomePage> {
                   });
                   Navigator.pop(context);
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  foregroundColor: Colors.white,
-                ),
+                style: ElevatedButton.styleFrom(),
                 child: Text(
                   l10n.save,
                   style: const TextStyle(fontFamily: "SpaceGrotesk"),
@@ -455,7 +446,6 @@ class _HomePageState extends State<HomePage> {
     final l10n = AppLocalizations.of(context)!;
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
@@ -495,7 +485,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   trailing:
                       c == selectedCategory
-                          ? const Icon(Icons.check, color: Colors.black)
+                          ? const Icon(Icons.check)
                           : null,
                   onTap: () {
                     onSelect(c);
