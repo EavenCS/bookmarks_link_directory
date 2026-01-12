@@ -99,5 +99,16 @@
       }
     }
   },
-  "noCategoriesFound": "Noch keine Kategorien gefunden."
+  "noCategoriesFound": "Noch keine Kategorien gefunden.",
+  "impressumTitle": "Impressum",
+  "impressumSubtitle": "Angaben gemäß § 5 DDG",
+  "impressumProviderLabel": "Anbieter",
+  "impressumRepresentedBy": "Vertreten durch",
+  "impressumContact": "Kontakt",
+  "impressumPhone": "Telefon",
+  "impressumDisputeResolutionTitle": "Verbraucherstreitbeilegung / Universalschlichtungsstelle",
+  "impressumDisputeResolutionText": "Wir nehmen nicht an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil und sind dazu auch nicht verpflichtet.",
+  "impressumPrivacyPolicyTitle": "Datenschutzerklärung",
+  "impressumPrivacyPolicyLink": "Datenschutzerklärung ansehen",
+  "impressumGeneratedWith": "Erstellt mit Impressum-Generator.de, dem Tool für Impressum und Datenschutz-Erklärung. Nach einer Vorlage der Kanzlei Hasselbach."
 }

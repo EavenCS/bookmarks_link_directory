@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'about_dev.dart';
 import 'manage_categories.dart';
+import 'impressum.dart';
 import '../widgets/appbar.dart';
 import '../l10n/app_localizations.dart';
 
@@ -87,6 +88,23 @@ class _SettingsState extends State<Settings> {
               icon: const Icon(Icons.person_outline),
               label: Text(
                 l10n.aboutDeveloper,
+                style: const TextStyle(fontFamily: "SpaceGrotesk"),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                foregroundColor: Colors.white,
+              ),
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const ImpressumPage()),
+                );
+              },
+              icon: const Icon(Icons.info_outline),
+              label: Text(
+                l10n.impressumTitle,
                 style: const TextStyle(fontFamily: "SpaceGrotesk"),
               ),
               style: ElevatedButton.styleFrom(

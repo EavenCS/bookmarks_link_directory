@@ -99,5 +99,16 @@
       }
     }
   },
-  "noCategoriesFound": "No categories found yet."
+  "noCategoriesFound": "No categories found yet.",
+  "impressumTitle": "Legal Notice",
+  "impressumSubtitle": "Information according to § 5 DDG",
+  "impressumProviderLabel": "Provider",
+  "impressumRepresentedBy": "Represented by",
+  "impressumContact": "Contact",
+  "impressumPhone": "Phone",
+  "impressumDisputeResolutionTitle": "Consumer Dispute Resolution / Universal Arbitration Board",
+  "impressumDisputeResolutionText": "We do not participate in dispute resolution proceedings before a consumer arbitration board and are not obliged to do so.",
+  "impressumPrivacyPolicyTitle": "Privacy Policy",
+  "impressumPrivacyPolicyLink": "View Privacy Policy",
+  "impressumGeneratedWith": "Created with Impressum-Generator.de, the tool for legal notice and privacy policy. Based on a template from Kanzlei Hasselbach."
 }

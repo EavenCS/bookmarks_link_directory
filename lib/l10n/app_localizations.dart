@@ -403,6 +403,72 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Noch keine Kategorien gefunden.'**
   String get noCategoriesFound;
+
+  /// No description provided for @impressumTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Impressum'**
+  String get impressumTitle;
+
+  /// No description provided for @impressumSubtitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Angaben gemäß § 5 DDG'**
+  String get impressumSubtitle;
+
+  /// No description provided for @impressumProviderLabel.
+  ///
+  /// In de, this message translates to:
+  /// **'Anbieter'**
+  String get impressumProviderLabel;
+
+  /// No description provided for @impressumRepresentedBy.
+  ///
+  /// In de, this message translates to:
+  /// **'Vertreten durch'**
+  String get impressumRepresentedBy;
+
+  /// No description provided for @impressumContact.
+  ///
+  /// In de, this message translates to:
+  /// **'Kontakt'**
+  String get impressumContact;
+
+  /// No description provided for @impressumPhone.
+  ///
+  /// In de, this message translates to:
+  /// **'Telefon'**
+  String get impressumPhone;
+
+  /// No description provided for @impressumDisputeResolutionTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Verbraucherstreitbeilegung / Universalschlichtungsstelle'**
+  String get impressumDisputeResolutionTitle;
+
+  /// No description provided for @impressumDisputeResolutionText.
+  ///
+  /// In de, this message translates to:
+  /// **'Wir nehmen nicht an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil und sind dazu auch nicht verpflichtet.'**
+  String get impressumDisputeResolutionText;
+
+  /// No description provided for @impressumPrivacyPolicyTitle.
+  ///
+  /// In de, this message translates to:
+  /// **'Datenschutzerklärung'**
+  String get impressumPrivacyPolicyTitle;
+
+  /// No description provided for @impressumPrivacyPolicyLink.
+  ///
+  /// In de, this message translates to:
+  /// **'Datenschutzerklärung ansehen'**
+  String get impressumPrivacyPolicyLink;
+
+  /// No description provided for @impressumGeneratedWith.
+  ///
+  /// In de, this message translates to:
+  /// **'Erstellt mit Impressum-Generator.de, dem Tool für Impressum und Datenschutz-Erklärung. Nach einer Vorlage der Kanzlei Hasselbach.'**
+  String get impressumGeneratedWith;
 }
 
 class _AppLocalizationsDelegate

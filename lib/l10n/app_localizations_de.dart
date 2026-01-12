@@ -176,4 +176,40 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get noCategoriesFound => 'Noch keine Kategorien gefunden.';
+
+  @override
+  String get impressumTitle => 'Impressum';
+
+  @override
+  String get impressumSubtitle => 'Angaben gemäß § 5 DDG';
+
+  @override
+  String get impressumProviderLabel => 'Anbieter';
+
+  @override
+  String get impressumRepresentedBy => 'Vertreten durch';
+
+  @override
+  String get impressumContact => 'Kontakt';
+
+  @override
+  String get impressumPhone => 'Telefon';
+
+  @override
+  String get impressumDisputeResolutionTitle =>
+      'Verbraucherstreitbeilegung / Universalschlichtungsstelle';
+
+  @override
+  String get impressumDisputeResolutionText =>
+      'Wir nehmen nicht an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teil und sind dazu auch nicht verpflichtet.';
+
+  @override
+  String get impressumPrivacyPolicyTitle => 'Datenschutzerklärung';
+
+  @override
+  String get impressumPrivacyPolicyLink => 'Datenschutzerklärung ansehen';
+
+  @override
+  String get impressumGeneratedWith =>
+      'Erstellt mit Impressum-Generator.de, dem Tool für Impressum und Datenschutz-Erklärung. Nach einer Vorlage der Kanzlei Hasselbach.';
 }

@@ -175,4 +175,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noCategoriesFound => 'No categories found yet.';
+
+  @override
+  String get impressumTitle => 'Legal Notice';
+
+  @override
+  String get impressumSubtitle => 'Information according to § 5 DDG';
+
+  @override
+  String get impressumProviderLabel => 'Provider';
+
+  @override
+  String get impressumRepresentedBy => 'Represented by';
+
+  @override
+  String get impressumContact => 'Contact';
+
+  @override
+  String get impressumPhone => 'Phone';
+
+  @override
+  String get impressumDisputeResolutionTitle =>
+      'Consumer Dispute Resolution / Universal Arbitration Board';
+
+  @override
+  String get impressumDisputeResolutionText =>
+      'We do not participate in dispute resolution proceedings before a consumer arbitration board and are not obliged to do so.';
+
+  @override
+  String get impressumPrivacyPolicyTitle => 'Privacy Policy';
+
+  @override
+  String get impressumPrivacyPolicyLink => 'View Privacy Policy';
+
+  @override
+  String get impressumGeneratedWith =>
+      'Created with Impressum-Generator.de, the tool for legal notice and privacy policy. Based on a template from Kanzlei Hasselbach.';
 }
