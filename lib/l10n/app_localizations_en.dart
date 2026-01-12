@@ -117,7 +117,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get aboutApp => 'About the app';
 
   @override
-  String get version => 'Version: 1.0.0';
+  String get version => 'Version: 1.0.1';
 
   @override
   String get developedBy => 'Developed by: Eaven-René Schmalz';
