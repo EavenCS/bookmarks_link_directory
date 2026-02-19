@@ -58,7 +58,7 @@
   "editOrDeleteCategories": "Bearbeite oder lösche bestehende Kategorien.",
   "manageCategories": "Kategorien verwalten",
   "aboutApp": "Über die App",
-  "version": "Version: 1.0.1",
+  "version": "Version: 1.1.0",
   "developedBy": "Entwickelt von: Eaven-René Schmalz",
   "aboutDeveloper": "Über den Entwickler",
   "errorInitializingHive": "❌ Fehler beim Initialisieren von Hive: {error}",

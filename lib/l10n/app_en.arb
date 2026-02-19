@@ -58,7 +58,7 @@
   "editOrDeleteCategories": "Edit or delete existing categories.",
   "manageCategories": "Manage categories",
   "aboutApp": "About the app",
-  "version": "Version: 1.0.1",
+  "version": "Version: 1.1.0",
   "developedBy": "Developed by: Eaven-René Schmalz",
   "aboutDeveloper": "About the developer",
   "errorInitializingHive": "❌ Error initializing Hive: {error}",

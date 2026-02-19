@@ -323,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @version.
   ///
   /// In de, this message translates to:
-  /// **'Version: 1.0.1'**
+  /// **'Version: 1.1.0'**
   String get version;
 
   /// No description provided for @developedBy.
