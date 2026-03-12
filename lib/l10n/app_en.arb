@@ -103,6 +103,17 @@
     }
   },
   "noCategoriesFound": "No categories found yet.",
+  "categoryName": "Category name",
+  "categoryNameEmpty": "Category name cannot be empty",
+  "categoryAlreadyExists": "Category '{name}' already exists",
+  "@categoryAlreadyExists": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "add": "Add",
   "impressumTitle": "Legal Notice",
   "impressumSubtitle": "Information according to § 5 DDG",
   "impressumProviderLabel": "Provider",

@@ -422,6 +422,30 @@ abstract class AppLocalizations {
   /// **'Noch keine Kategorien gefunden.'**
   String get noCategoriesFound;
 
+  /// No description provided for @categoryName.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategoriename'**
+  String get categoryName;
+
+  /// No description provided for @categoryNameEmpty.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategoriename darf nicht leer sein'**
+  String get categoryNameEmpty;
+
+  /// No description provided for @categoryAlreadyExists.
+  ///
+  /// In de, this message translates to:
+  /// **'Kategorie \'{name}\' existiert bereits'**
+  String categoryAlreadyExists(String name);
+
+  /// No description provided for @add.
+  ///
+  /// In de, this message translates to:
+  /// **'Hinzufügen'**
+  String get add;
+
   /// No description provided for @impressumTitle.
   ///
   /// In de, this message translates to:

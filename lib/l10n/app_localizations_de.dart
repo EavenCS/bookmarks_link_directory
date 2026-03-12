@@ -187,6 +187,20 @@ class AppLocalizationsDe extends AppLocalizations {
   String get noCategoriesFound => 'Noch keine Kategorien gefunden.';
 
   @override
+  String get categoryName => 'Kategoriename';
+
+  @override
+  String get categoryNameEmpty => 'Kategoriename darf nicht leer sein';
+
+  @override
+  String categoryAlreadyExists(String name) {
+    return 'Kategorie \'$name\' existiert bereits';
+  }
+
+  @override
+  String get add => 'Hinzufügen';
+
+  @override
   String get impressumTitle => 'Impressum';
 
   @override

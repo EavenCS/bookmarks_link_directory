@@ -103,6 +103,17 @@
     }
   },
   "noCategoriesFound": "Noch keine Kategorien gefunden.",
+  "categoryName": "Kategoriename",
+  "categoryNameEmpty": "Kategoriename darf nicht leer sein",
+  "categoryAlreadyExists": "Kategorie '{name}' existiert bereits",
+  "@categoryAlreadyExists": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "add": "Hinzufügen",
   "impressumTitle": "Impressum",
   "impressumSubtitle": "Angaben gemäß § 5 DDG",
   "impressumProviderLabel": "Anbieter",

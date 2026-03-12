@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../boxes.dart';
 import '../widgets/appbar.dart';
 import '../l10n/app_localizations.dart';
+import '../model/category.dart';
 
 class ManageCategoriesPage extends StatefulWidget {
   const ManageCategoriesPage({super.key});
@@ -12,6 +13,7 @@ class ManageCategoriesPage extends StatefulWidget {
 
 class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
   late List<String> categories;
+  late Map<String, int> categoryBookmarkCounts;
 
   @override
   void initState() {
@@ -23,6 +25,63 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
     final categoriesBox = Boxes.getCategoriesBox();
     categories = categoriesBox.values.map((c) => c.name).toList();
     categories.sort();
+    _calculateBookmarkCounts();
+  }
+
+  void _calculateBookmarkCounts() {
+    categoryBookmarkCounts = {};
+    final bookmarksBox = Boxes.getBookmarksBox();
+
+    for (final category in categories) {
+      int count = 0;
+      for (final bookmark in bookmarksBox.values) {
+        if (bookmark.tags.contains(category)) {
+          count++;
+        }
+      }
+      categoryBookmarkCounts[category] = count;
+    }
+  }
+
+  void _addNewCategory(String name) {
+    final l10n = AppLocalizations.of(context)!;
+
+    if (name.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.categoryNameEmpty),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    if (categories.contains(name)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(l10n.categoryAlreadyExists(name)),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    final categoriesBox = Boxes.getCategoriesBox();
+    final category = Category(name: name);
+    categoriesBox.add(category);
+
+    setState(() {
+      categories.add(name);
+      categories.sort();
+      categoryBookmarkCounts[name] = 0;
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(l10n.categoryAdded(name)),
+        backgroundColor: Colors.green,
+      ),
+    );
   }
 
   void _renameCategory(String oldName, String newName) {
@@ -48,7 +107,11 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
     }
 
     setState(() {
-      categories[categories.indexOf(oldName)] = newName;
+      final index = categories.indexOf(oldName);
+      final count = categoryBookmarkCounts[oldName] ?? 0;
+      categories[index] = newName;
+      categoryBookmarkCounts.remove(oldName);
+      categoryBookmarkCounts[newName] = count;
     });
   }
 
@@ -71,7 +134,50 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
 
     setState(() {
       categories.remove(name);
+      categoryBookmarkCounts.remove(name);
     });
+  }
+
+  void _showAddCategoryDialog() {
+    final l10n = AppLocalizations.of(context)!;
+    final controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder:
+          (dialogContext) => AlertDialog(
+            title: Text(
+              l10n.addNewCategory,
+              style: const TextStyle(fontFamily: "SpaceGrotesk"),
+            ),
+            content: TextField(
+              controller: controller,
+              autofocus: true,
+              decoration: InputDecoration(
+                labelText: l10n.categoryName,
+                border: const OutlineInputBorder(),
+              ),
+              onSubmitted: (value) {
+                final name = value.trim();
+                _addNewCategory(name);
+                Navigator.pop(dialogContext);
+              },
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(dialogContext),
+                child: Text(l10n.cancel),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  final name = controller.text.trim();
+                  _addNewCategory(name);
+                  Navigator.pop(dialogContext);
+                },
+                child: Text(l10n.add),
+              ),
+            ],
+          ),
+    );
   }
 
   void _showRenameDialog(String oldName) {
@@ -156,6 +262,7 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
                   final name = categories[index];
+                  final count = categoryBookmarkCounts[name] ?? 0;
                   return Card(
                     margin: const EdgeInsets.symmetric(
                       horizontal: 12,
@@ -167,6 +274,14 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
                         style: const TextStyle(
                           fontFamily: "SpaceGrotesk",
                           fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '$count Bookmark${count != 1 ? 's' : ''}',
+                        style: const TextStyle(
+                          fontFamily: "SpaceGrotesk",
+                          fontSize: 13,
+                          color: Colors.grey,
                         ),
                       ),
                       trailing: Row(
@@ -192,6 +307,11 @@ class _ManageCategoriesPageState extends State<ManageCategoriesPage> {
                   );
                 },
               ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _showAddCategoryDialog,
+        tooltip: l10n.addNewCategory,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
